@@ -2,6 +2,7 @@
 module Main where
 
 import Control.Monad
+import Data.Either
 import Data.List hiding (find)
 import Data.Maybe
 import Network.MPD
@@ -62,5 +63,7 @@ attrs = [
   ("disc", maybe "" (show . fst) . sgDisc)]
 
 main :: IO ()
-main = (withMPD $ find anything) >>= either print (toString >=> putStr . maybe "Nothing" id)
+main = (withMPD $ listAllInfo "/" >>= return . rights)
+       >>=
+       either print (toString >=> putStr . maybe "Nothing" id)
 
