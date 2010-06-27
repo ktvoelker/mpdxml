@@ -1,0 +1,6 @@
+.*.sw*
+a.out
+*.hi
+*.o
+mpdxml
+out.xml
